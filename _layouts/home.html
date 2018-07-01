@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: " en-US " }}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> {{ seo }}
+
+    <link rel="stylesheet" href="{{ "/assets/css/styles.css" | relative_url }}">
+
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <![endif]-->
+</head>
+
+<body>
+    <div id="frontpage-wrapper">
+        <div class="left">
+            <div class="content">
+                <div class="header">
+                    {% if site.logo %}
+                    <img src="{{ site.logo | relative_url }}" alt="Logo" /> 
+                    {% endif %}
+                    <h1>{{ site.title | default: site.github.repository_name }}</h1>
+
+                </div>
+
+                <h2>{{ site.description | default: site.github.project_tagline }}</h2>
+
+                <h3>Latest Release: {{ site.version | default: site.github.latest_release.tag_name }}</h3>
+                <a href="cydia://url/https://cydia.saurik.com/api/share#?source={{ site.cydia_repo | default: site.github.url }}">GET IT FROM CYDIA</a>
+                <br>
+                <a href="{{ site.releases | default: site.github.releases_url }}">GET IT FROM GITHUB</a>
+                <br>
+                <a href="https://builds.io/?aid={{ site.aid | default: 1025533 }}">BUILD STORE</a>
+            </div>
+        </div>
+        <div class="right">
+            <div class="phone">
+                <div class="helper"></div>
+                <img src="{{ site.screenshot | relative_url }}" class="content">
+                <img src="assets/img/iphone.png" class="mask">
+            </div>
+        </div>
+        <span class="next-section">
+            <a href="#info">&#8964;</a>
+        </span>
+    </div>
+
+
+    <div id="info-container">
+        <div id="info">
+            {{ content }}
+        </div>
+    </div>
+
+
+    <script src="{{ "/assets/js/smooth-scroll.polyfills.min.js" | relative_url }}"></script>
+    <script type="text/javascript">
+        var scroll = new SmoothScroll('a[href*="#"]');
+    </script>
+</body>
+
+</html>
