@@ -1,0 +1,57 @@
+@media only screen and (max-width: 600px) {
+  #frontpage-wrapper {
+    > div {
+      width: 100%;
+      padding-top: 10px;
+    }
+    .right {
+      display: none;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    > span {
+      font-size: 7em;
+      bottom: 0;
+
+      > a {
+        display: block;
+        text-align: center;
+        width: 100px;
+        transform: translateX(-50%) scaleX(1.5);
+      }
+
+      > a:before {
+        content: "";
+        transform: translate(-50%, 2.25em) scale(0.6667, 1);
+      }
+    }
+  }
+
+  #info-container > #info {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-height: 700px) {
+    #frontpage-wrapper {
+        > span {
+            animation-name: initial;
+            animation-duration: initial;
+            animation-fill-mode: initial;
+            animation-iteration-count: initial;
+        }
+    }
+}
+
+@media only screen and (max-height: 650px) {
+    #frontpage-wrapper {
+        // Peek a little of the next page so users know to scroll (perhaps)
+        height: 95%;
+        > span {
+            display: none;
+        }
+    }
+}
