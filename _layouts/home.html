@@ -40,8 +40,8 @@
         <div class="right">
             <div class="phone">
                 <div class="helper"></div>
-                <img src="{{ site.screenshot | relative_url }}" class="content">
-                <img src="assets/img/iphone.png" class="mask">
+                <img data-src="{{ site.screenshot | relative_url }}" class="content">
+                <img data-src="assets/img/iphone.png" class="mask">
             </div>
         </div>
         <span class="next-section">
@@ -57,9 +57,39 @@
     </div>
 
 
-    <script src="{{ "/assets/js/smooth-scroll.polyfills.min.js" | relative_url }}"></script>
+    <script src="{{ "/assets/js/smooth-scroll.polyfills.min.js" | relative_url }}" async onload="new SmoothScroll('a[href*=&quot;#&quot;]')"></script>
     <script type="text/javascript">
-        var scroll = new SmoothScroll('a[href*="#"]');
+        (function () {
+
+            // https://developer.mozilla.org/en-US/docs/Web/Events/resize
+            window.addEventListener("resize", onResize, false);
+            var resizeTimeout;
+            function onResize() {
+                // ignore resize events as long as an resizeHandler execution is in the queue
+                if (!resizeTimeout) {
+                    resizeTimeout = setTimeout(function () {
+                        resizeTimeout = null;
+                        resizeHandler();
+
+                        // The resizeHandler will execute at a rate of 15fps
+                    }, 66);
+                }
+            }
+
+            function resizeHandler() {
+                var elems = document.querySelectorAll('img');
+                for (var i = 0; i < elems.length; i++) {
+                    if (elems[i].offsetParent !== null) {
+                        var src = elems[i].getAttribute('data-src');
+                        if (src) {
+                            elems[i].setAttribute('src', src);
+                        }
+                    }
+                }
+            }
+
+            resizeHandler();
+        })();
     </script>
 </body>
 
